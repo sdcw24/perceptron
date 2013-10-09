@@ -21,34 +21,37 @@ public class Perceptron {
 		ArrayList<List<Float>> parsed = new ArrayList<List<Float>>();
 		
 		
-	try {
-				buff = new BufferedReader(new FileReader(fileName));
-
-			line = buff.readLine();
+		try {
+			buff = new BufferedReader(new FileReader(fileName));
 			
-			while ( line != null) {
+			while ( (line = buff.readLine()) != null) {
 				
 				List<Float> row = new ArrayList<Float>();
 				
 				for (String t : line.split(splitter)) {
 					row.add(Float.valueOf(t));
-					
+					//System.out.println("Row:  ");
+					//System.out.println(row.toString());
+					//System.out.println("\n");
 				}
 				
 				parsed.add(row);
+				//System.out.println("Parsed:  ");
+				//System.out.println(parsed.toString());
+				//System.out.println("\n");
 			}
-	} catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 			
 		
-	} finally {
+		} finally {
 	
-		if (buff != null) {
-			buff.close();
+			if (buff != null) {
+				buff.close();
+			}
 		}
-	}
-	return parsed;
+		return parsed;
 	}
 	
 	void pTrain () {
@@ -62,12 +65,10 @@ public class Perceptron {
 	public static void main (String [] args) throws IOException {
 		
 		Perceptron percy = new Perceptron();
+		System.out.println("My name is Percy!\n");
 		
 		ArrayList<List<Float>> file = percy.parseCSV(percy.trainingData);
 		
-		for (List<Float> list : file) {
-			System.out.println(list);
-		}
 		
 	}
 
